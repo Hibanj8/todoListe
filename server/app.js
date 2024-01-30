@@ -26,7 +26,7 @@ const startserver = async () =>{
 } 
 startserver();
 
-// Route to get all tasks
+
 app.get('/api/tasks', async (req, res) => {
     try {
       const tasks = await Task.find({ deletedAt: null });
@@ -34,9 +34,9 @@ app.get('/api/tasks', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  });
+});
   
-  // Route to get a task by ID
+
 app.get('/api/tasks/:id', async (req, res) => {
     try {
       const task = await Task.findOne({ _id: req.params.id, deletedAt: null });
@@ -47,7 +47,7 @@ app.get('/api/tasks/:id', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  });
+});
 
 app.post('/api/tasks', async (req, res) => {
     try {
@@ -73,6 +73,7 @@ app.post('/api/tasks', async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
+
 app.put('/api/tasks/:id', async (req, res) => {
     try {
       const updatedTask = await Task.findOneAndUpdate(
@@ -87,10 +88,10 @@ app.put('/api/tasks/:id', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  });
+});
 
-  app.delete('/api/tasks/:id', async (req, res) => {
-    try {
+app.delete('/api/tasks/:id', async (req, res) => {
+  try {
       const deletedTask = await Task.findOneAndUpdate(
         { _id: req.params.id, deletedAt: null },
         { deletedAt: new Date() },
