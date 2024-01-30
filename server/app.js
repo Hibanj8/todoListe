@@ -4,7 +4,7 @@ const db = require("./models");
 const taskRoutes = require("./routes/task.routes");
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8000; 
 
 app.use(express.json());
 
