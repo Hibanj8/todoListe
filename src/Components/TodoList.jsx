@@ -46,7 +46,7 @@ function TodoList() {
         <h1 className="text-gray-800 font-bold text-2xl uppercase appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none">To-Do List</h1>
     </div>
             <Link to="/Create"
-                className=" ml-10 sm:ml-30 ml-36 flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded mx-5"
+                className=" sm:ml-30 ml-36 flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded mx-5"
                 type="button">
                  Add a task
              </Link>
@@ -63,9 +63,9 @@ function TodoList() {
                     <span className="text-sm font-light text-gray-500">  {task.createdBy}</span>
                          </div>
                        <div >
-                         <button class="inline-flex items-center justify-center w-10 h-10 mr-2 focus:ring-teal-500 transition-colors duration-150 bg-white rounded-full focus:shadow-outline">
+                       <Link to={`/update/${task._id}`} class="inline-flex items-center justify-center w-10 h-10 mr-2 focus:ring-teal-500 transition-colors duration-150 bg-white rounded-full focus:shadow-outline">
                         <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
-                        </button>
+                        </Link>
                         <button onClick={(e) => handleDelete(task._id)} class="inline-flex items-center justify-center w-10 h-10 mr-2 focus:ring-teal-500 transition-colors duration-150 bg-white rounded-full focus:shadow-outline">
                         <svg
                             stroke="currentColor"
