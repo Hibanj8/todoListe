@@ -6,6 +6,7 @@ import { Link, useNavigate  } from 'react-router-dom';
 
 function AddNewTodoForm (){
     const [error, setError] = useState(null);
+>>>>>>>>> Temporary merge branch 2
     const navigate = useNavigate();
     const [values, setValues] = useState({
         title: "",
