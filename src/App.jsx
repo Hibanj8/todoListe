@@ -6,7 +6,6 @@ import Update from './Components/Update';
 
 function App() {
  
-
   return (
   
     <BrowserRouter>
