@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 
 function AddNewTodoForm (){
 
@@ -179,10 +179,8 @@ return(
                     </div>
 
                     <div className="mt-6">
-                        <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-500 hover:bg-teal-600 focus:outline-none " type="submit">
-                            Add Task
-                        </button>
-                    </div>
+                          <Link to={'/'}  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-500 hover:bg-teal-600 focus:outline-none " type="submit">Add Task</Link>
+                     </div>
                 </form>
             </div>
         </div>

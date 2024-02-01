@@ -1,13 +1,23 @@
-import './App.css';
+import './App.css'
+import { BrowserRouter , Route , Routes } from 'react-router-dom';
+import AddNewTodoForm from './Components/AddNewTodoForm'
 import TodoList from './Components/TodoList';
+import Read from './Components/Read';
 
 function App() {
  
 
   return (
-    <>
-      <TodoList/> 
-    </>
+  
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<TodoList/>}></Route> 
+      <Route path='/create' element={<AddNewTodoForm/>}></Route>
+      <Route path='/Read/:id' element={<Read/>}></Route>
+
+    </Routes>
+  </BrowserRouter>
+
   )
 }
 
