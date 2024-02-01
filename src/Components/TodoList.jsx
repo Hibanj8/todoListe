@@ -40,7 +40,7 @@ function TodoList() {
 <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-16">
     
 
-    <form classNameName="w-full max-w-sm mx-auto px-4 py-2">
+    <form >
         <div className="flex items-center border-b-2 border-teal-500 py-2">
             <div className="px-4 py-2">
         <h1 className="text-gray-800 font-bold text-2xl uppercase appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none">To-Do List</h1>
@@ -57,28 +57,28 @@ function TodoList() {
     {tasks.reverse().map((task, id) => (
         <li className="py-4" key={id}>
             <div className="flex items-center">
-                <label for="todo1" className="ml-2 text-gray-900 grid grid-cols-4">
+                <label htmlFor="todo1" className="ml-2 text-gray-900 grid grid-cols-4">
                    <div className="col-span-3 mt-2">
                      <Link to={`/Read/${task._id}`} className="text-lg font-medium">{task.title}</Link>
                     <span className="text-sm font-light text-gray-500">  {task.createdBy}</span>
                          </div>
                        <div >
-                       <Link to={`/update/${task._id}`} class="inline-flex items-center justify-center w-10 h-10 mr-2 focus:ring-teal-500 transition-colors duration-150 bg-white rounded-full focus:shadow-outline">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
+                       <Link to={`/update/${task._id}`} className="inline-flex items-center justify-center w-10 h-10 mr-2 focus:ring-teal-500 transition-colors duration-150 bg-white rounded-full focus:shadow-outline">
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
                         </Link>
-                        <button onClick={(e) => handleDelete(task._id)} class="inline-flex items-center justify-center w-10 h-10 mr-2 focus:ring-teal-500 transition-colors duration-150 bg-white rounded-full focus:shadow-outline">
+                        <button onClick={(e) => handleDelete(task._id)} className="inline-flex items-center justify-center w-10 h-10 mr-2 focus:ring-teal-500 transition-colors duration-150 bg-white rounded-full focus:shadow-outline">
                         <svg
                             stroke="currentColor"
                             viewBox="0 0 24 24"
                             fill="none"
-                            class="h-5 w-5 mr-2"
+                            className="h-5 w-5 mr-2"
                             xmlns="http://www.w3.org/2000/svg"
                         >
                             <path
                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                            stroke-width="2"
-                            stroke-linejoin="round"
-                            stroke-linecap="round"
+                            strokeWidth="2"
+                            strokeLinejoin="round"
+                            strokeLinecap="round"
                             ></path>
                         </svg>
                         </button></div>
