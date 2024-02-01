@@ -46,7 +46,7 @@ function TodoList() {
     </form>
 
     <ul className="divide-y divide-gray-200 px-4">
-    {tasks.reverse().map((task, id) => (
+    {tasks.reverse().map((task, id) => ( 
         <li className="py-4" key={id}>
             <div className="flex items-center">
                 <input id="todo1" name="todo1" type="checkbox"
