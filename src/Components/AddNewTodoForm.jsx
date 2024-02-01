@@ -2,7 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate  } from 'react-router-dom';
 
+
+
 function AddNewTodoForm (){
+    const [error, setError] = useState(null);
+
     const navigate = useNavigate();
     const [values, setValues] = useState({
         title: "",
@@ -16,6 +20,10 @@ function AddNewTodoForm (){
 
       const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!values.title || !values.priority || !values.status || !values.description || !values.createdBy || !values.deadline) {
+            setError("All fields (*) are required");
+            return;
+        }
         try {
             console.log(values);
           const res = await axios.post("http://localhost:5000/api/tasks", values);
@@ -23,6 +31,9 @@ function AddNewTodoForm (){
           navigate('/');
         } catch (error) {
           console.log(error);
+          if (error.response && error.response.status === 400) {
+            setError("Task already exists");
+        }
         }
     
         setValues({
@@ -44,8 +55,9 @@ return(
             <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <form method="POST" action="#" >
                     <div>
+                       
                         <label className="block text-sm font-medium text-gray-700" >
-                           title
+                           title <span className="text-red-500">*</span>
                         </label>
                         <div className="mt-1">
                             <input
@@ -64,7 +76,7 @@ return(
 
                     <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700" htmlFor="priority">
-                  Priorité
+                  Priorité <span className="text-red-500">*</span>
                 </label>
                 <div className="mt-1">
                   <select
@@ -84,7 +96,7 @@ return(
 
               <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700" htmlFor="status">
-                  Statut
+                  Statut <span className="text-red-500">*</span>
                 </label>
                 <div className="mt-1">
                   <select
@@ -104,7 +116,7 @@ return(
 
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700" >
-                         description
+                         description <span className="text-red-500">*</span>
                         </label>
                         <div className="mt-1">
                             <input
@@ -123,7 +135,7 @@ return(
 
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700" >
-                        createdBy
+                        createdBy <span className="text-red-500">*</span>
                         </label>
                         <div className="mt-1">
                             <input
@@ -142,7 +154,7 @@ return(
 
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700">
-                        deadline
+                        deadline <span className="text-red-500">*</span>
                         </label>
                         <div className="mt-1">
                             <input
@@ -161,7 +173,7 @@ return(
                     
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700">
-                        comments
+                        comments 
                         </label>
                         <div className="mt-1">
                             <input
@@ -175,6 +187,9 @@ return(
                                     setValues({ ...values, comments: e.target.value })
                                   }
                         />
+                        </div>
+                        <div className="mt-2">
+                            {error && <p className="text-red-500">{error}</p>}
                         </div>
                     </div>
 

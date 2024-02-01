@@ -33,6 +33,12 @@ function Update() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+
+    if (!values.title || !values.priority || !values.status || !values.description || !values.createdBy || !values.deadline) {
+        setError("All fields (*) are required");
+        return;
+    }
+
     try {
       console.log(values);
       const res = await axios.put(`http://localhost:5000/api/tasks/${id}`, values);
@@ -56,7 +62,9 @@ return(
                 <form method="POST" action="#" >
                     <div>
                         <label className="block text-sm font-medium text-gray-700" >
-                           title
+
+                           title <span className="text-red-500">*</span>
+
                         </label>
                         <div className="mt-1">
                             <input
@@ -75,7 +83,9 @@ return(
 
                     <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700" htmlFor="priority">
-                  Priorité
+
+                  Priorité <span className="text-red-500">*</span>
+
                 </label>
                 <div className="mt-1">
                   <select
@@ -95,7 +105,9 @@ return(
 
               <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700" htmlFor="status">
-                  Statut
+
+                  Statut <span className="text-red-500">*</span>
+
                 </label>
                 <div className="mt-1">
                   <select
@@ -115,8 +127,9 @@ return(
 
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700" >
-                         description
-                        </label>
+
+                         description <span className="text-red-500">*</span>
+             </label>
                         <div className="mt-1">
                             <input
                                 className="appearance-none block w-full px-3 py-2 border border-bg-teal-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-bg-teal-300 sm:text-sm"
@@ -134,7 +147,9 @@ return(
 
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700" >
-                        createdBy
+
+                        createdBy <span className="text-red-500">*</span>
+
                         </label>
                         <div className="mt-1">
                             <input
@@ -153,7 +168,9 @@ return(
 
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700">
-                        deadline
+
+                        deadline <span className="text-red-500">*</span>
+
                         </label>
                         <div className="mt-1">
                             <input
@@ -172,7 +189,9 @@ return(
                     
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700">
+
                         comments
+
                         </label>
                         <div className="mt-1">
                             <input
@@ -187,6 +206,11 @@ return(
                                   }
                         />
                         </div>
+
+                        <div className="mt-2">
+                            {error && <p className="text-red-500">{error}</p>}
+                        </div>
+
                     </div>
 
                     <div className="mt-6">
