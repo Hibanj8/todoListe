@@ -33,6 +33,10 @@ function Update() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    if (!values.title || !values.priority || !values.status || !values.description || !values.createdBy || !values.deadline) {
+        setError("All fields (*) are required");
+        return;
+    }
     try {
       console.log(values);
       const res = await axios.put(`http://localhost:5000/api/tasks/${id}`, values);
@@ -56,7 +60,7 @@ return(
                 <form method="POST" action="#" >
                     <div>
                         <label className="block text-sm font-medium text-gray-700" >
-                           title
+                           title <span className="text-red-500">*</span>
                         </label>
                         <div className="mt-1">
                             <input
@@ -75,7 +79,7 @@ return(
 
                     <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700" htmlFor="priority">
-                  Priorité
+                  Priorité <span className="text-red-500">*</span>
                 </label>
                 <div className="mt-1">
                   <select
@@ -95,7 +99,7 @@ return(
 
               <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700" htmlFor="status">
-                  Statut
+                  Statut <span className="text-red-500">*</span>
                 </label>
                 <div className="mt-1">
                   <select
@@ -115,7 +119,7 @@ return(
 
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700" >
-                         description
+                         description <span className="text-red-500">*</span>
                         </label>
                         <div className="mt-1">
                             <input
@@ -134,7 +138,7 @@ return(
 
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700" >
-                        createdBy
+                        createdBy <span className="text-red-500">*</span>
                         </label>
                         <div className="mt-1">
                             <input
@@ -153,7 +157,7 @@ return(
 
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700">
-                        deadline
+                        deadline <span className="text-red-500">*</span>
                         </label>
                         <div className="mt-1">
                             <input
@@ -172,7 +176,7 @@ return(
                     
                     <div className="mt-6">
                         <label className="block text-sm font-medium text-gray-700">
-                        comments
+                        comments 
                         </label>
                         <div className="mt-1">
                             <input
@@ -186,6 +190,9 @@ return(
                                     setValues({ ...values, comments: e.target.value })
                                   }
                         />
+                        </div>
+                        <div className="mt-2">
+                            {error && <p className="text-red-500">{error}</p>}
                         </div>
                     </div>
 
