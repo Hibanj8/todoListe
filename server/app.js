@@ -2,8 +2,8 @@ const express = require("express");
 // const db = require("./models/index")
 const db = require("./models");
 const taskRoutes = require("./routes/task.routes");
-
 const cors = require("cors")
+
 
 
 const app = express();
