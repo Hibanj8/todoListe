@@ -18,7 +18,6 @@ function AddNewTodoForm (){
         e.preventDefault();
         try {
             console.log(values);
-
           const res = await axios.post("http://localhost:5000/api/tasks", values);
           console.log(res.data);
         } catch (error) {
@@ -190,7 +189,5 @@ return(
 
 </>
 );
-
-
 }
 export default AddNewTodoForm;
