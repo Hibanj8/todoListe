@@ -1,40 +1,51 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Link, useNavigate  } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useParams ,useNavigate  } from 'react-router-dom';
 
-function AddNewTodoForm (){
-    const navigate = useNavigate();
-    const [values, setValues] = useState({
-        title: "",
-        priority: "",
-        status: "",
-        description: "",
-        createdBy:"",
-        deadline:"",
-        comments:""
-      });
+function Update() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    title: "",
+    priority: "",
+    status: "",
+    description: "",
+    createdBy: "",
+    deadline: "",
+    comments: ""
+  });
 
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            console.log(values);
-          const res = await axios.post("http://localhost:5000/api/tasks", values);
-          console.log(res.data);
-          navigate('/');
-        } catch (error) {
-          console.log(error);
-        }
-    
-        setValues({
-            title: "",
-            priority: "",
-            status: "",
-            description: "",
-            createdBy:"",
-            deadline:"",
-            comments:""
-        });
-      };
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/tasks/${id}`);
+        setValues(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError(error.message || "An error occurred while fetching data.");
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(values);
+      const res = await axios.put(`http://localhost:5000/api/tasks/${id}`, values);
+      console.log(res.data);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  };
 
 return(
 <>
@@ -179,9 +190,9 @@ return(
                     </div>
 
                     <div className="mt-6">
-                       <Link to="/" onClick={handleSubmit} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-500 hover:bg-teal-600 focus:outline-none " type="submit">
-                            Add Task
-                        </Link>
+                    <Link to="/" onClick={handleUpdate} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-500 hover:bg-teal-600 focus:outline-none " type="submit">
+                           Edit
+                    </Link>
                     </div>
                 </form>
             </div>
@@ -192,4 +203,4 @@ return(
 );
 
 }
-export default AddNewTodoForm;
+export default Update;
