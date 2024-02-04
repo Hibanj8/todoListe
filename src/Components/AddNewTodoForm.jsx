@@ -6,7 +6,6 @@ import { Link, useNavigate  } from 'react-router-dom';
 
 function AddNewTodoForm (){
     const [error, setError] = useState(null);
->>>>>>>>> Temporary merge branch 2
     const navigate = useNavigate();
     const [values, setValues] = useState({
         title: "",
@@ -33,7 +32,7 @@ function AddNewTodoForm (){
           console.log(error);
           if (error.response && error.response.status === 400) {
             setError("Task already exists");
-        }
+          }
         }
     
         setValues({
