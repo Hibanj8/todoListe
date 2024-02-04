@@ -4,7 +4,7 @@ import { Link, useParams ,useNavigate  } from 'react-router-dom';
 
 function Update() {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const [values, setValues] = useState({
     title: "",
     priority: "",
@@ -13,15 +13,16 @@ function Update() {
     createdBy: "",
     deadline: "",
     comments: ""
-  });
+  }); 
 
   const [error, setError] = useState(null);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/tasks/${id}`);
-        setValues(response.data);
+        setValues(response.data)
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
         setError(error.message || "An error occurred while fetching data.");
@@ -30,6 +31,12 @@ function Update() {
 
     fetchData();
   }, [id]);
+  let deadlineISO = "";
+  if (values.deadline) {
+    deadlineISO = new Date(values.deadline).toISOString().split('T')[0];
+  }
+  
+  console.log(deadlineISO);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -43,18 +50,19 @@ function Update() {
       console.log(values);
       const res = await axios.put(`http://localhost:5000/api/tasks/${id}`, values);
       console.log(res.data);
+
       navigate('/');
     } catch (error) {
       console.log(error);
     }
   };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  };
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // };
 
 return(
-<>
+<> 
     <div className="flex flex-col justify-center ">
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-2xl">
@@ -84,7 +92,7 @@ return(
                     <div className="mt-6">
                 <label className="block text-sm font-medium text-gray-700" htmlFor="priority">
 
-                  Priorité <span className="text-red-500">*</span>
+                  Priority <span className="text-red-500">*</span>
 
                 </label>
                 <div className="mt-1">
@@ -179,7 +187,7 @@ return(
                                 type="date"
                                 name="deadline"
                                 id="deadline"
-                                value={values.deadline}
+                                value={deadlineISO}
                                 onChange={(e) =>
                                     setValues({ ...values, deadline: e.target.value })
                                   }
