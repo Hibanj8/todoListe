@@ -6,7 +6,6 @@ import { Link, useNavigate  } from 'react-router-dom';
 
 function AddNewTodoForm (){
     const [error, setError] = useState(null);
-
     const navigate = useNavigate();
     const [values, setValues] = useState({
         title: "",
@@ -33,7 +32,7 @@ function AddNewTodoForm (){
           console.log(error);
           if (error.response && error.response.status === 400) {
             setError("Task already exists");
-        }
+          }
         }
     
         setValues({
@@ -118,7 +117,7 @@ return(
                         <label className="block text-sm font-medium text-gray-700" >
                          description <span className="text-red-500">*</span>
                         </label>
-                        <div className="mt-1">
+                        <div      className="mt-1">
                             <input
                                 className="appearance-none block w-full px-3 py-2 border border-bg-teal-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-bg-teal-300 sm:text-sm"
                                 required=""
