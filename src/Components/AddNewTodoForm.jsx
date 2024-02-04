@@ -5,46 +5,41 @@ import { Link, useNavigate  } from 'react-router-dom';
 
 
 function AddNewTodoForm (){
+
     const [error, setError] = useState(null);
-
     const navigate = useNavigate();
-    const [values, setValues] = useState({
-        title: "",
-        priority: "",
-        status: "",
-        description: "",
-        createdBy:"",
-        deadline:"",
-        comments:""
-      });
 
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!values.title || !values.priority || !values.status || !values.description || !values.createdBy || !values.deadline) {
+    const initialValues = {
+      title: "",
+      priority: "",
+      status: "",
+      description: "",
+      createdBy: "",
+      deadline: "",
+      comments: ""
+    };
+    const [values, setValues] = useState({...initialValues});
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      if (!values.title || !values.priority || !values.status || !values.description || !values.createdBy || !values.deadline) {
             setError("All fields (*) are required");
             return;
         }
-        try {
-            console.log(values);
+
+      try {
           const res = await axios.post("http://localhost:5000/api/tasks", values);
-          console.log(res.data);
           navigate('/');
-        } catch (error) {
+      } catch (error) {
           console.log(error);
+          
           if (error.response && error.response.status === 400) {
             setError("Task already exists");
-        }
-        }
+         }
+      }
     
-        setValues({
-            title: "",
-            priority: "",
-            status: "",
-            description: "",
-            createdBy:"",
-            deadline:"",
-            comments:""
-        });
+        setValues({...initialValues});
       };
 
 return(
